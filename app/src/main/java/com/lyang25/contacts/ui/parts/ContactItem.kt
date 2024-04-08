@@ -4,10 +4,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.lyang25.contacts.data.Contact
 import com.lyang25.contacts.ui.theme.ContactsTheme
 import java.util.UUID
@@ -25,7 +27,11 @@ fun ContactItem(
                 onClick(contact)
             }
     ) {
-
+        Text(
+            text = "${contact.lname}, ${contact.fname}",
+            fontSize = 21.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

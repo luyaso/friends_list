@@ -28,7 +28,19 @@ fun ContactItem(
             }
     ) {
         Text(
-            text = "${contact.lname}, ${contact.fname}",
+            text = "${
+                if (contact.lname == "") {
+                    "N/A"
+                } else contact.lname
+            }, ${
+                if (contact.fname == "") {
+                    "N/A"
+                } else contact.fname
+            } (${
+                if (contact.nname == "") {
+                    "N/A"
+                } else contact.nname
+            })",
             fontSize = 21.sp,
             modifier = Modifier.fillMaxWidth()
         )

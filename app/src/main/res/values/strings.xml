@@ -4,4 +4,7 @@
     <string name="contact">contact</string>
     <string name="cancel">cancel</string>
     <string name="add">add</string>
+    <string name="fname">first name</string>
+    <string name="lname">last name</string>
+    <string name="nname">nickname</string>
 </resources>

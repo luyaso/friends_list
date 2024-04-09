@@ -34,10 +34,8 @@ class MainActivity : ComponentActivity() {
                     MainScreen(
                         contactList = contactList,
                         addContact = { addContact(it) },
-
-                    ) {
-                        deleteContact(it)
-                    }
+                        deleteContact = { deleteContact(it) }
+                    )
                     loadContacts()
                 }
             }
@@ -54,10 +52,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun addContact(temp: String) {
+    private fun addContact(contact: Contact) {
         scope.launch {
             withContext(Dispatchers.Default) {
-                dao.insertContact(Contact(fname = temp))
+                dao.insertContact(contact)
 
                 contactList.clear()
                 loadContacts()

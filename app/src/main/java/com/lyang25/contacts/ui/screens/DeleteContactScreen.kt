@@ -23,12 +23,11 @@ import androidx.compose.ui.unit.sp
 import com.lyang25.contacts.R
 import com.lyang25.contacts.data.Contact
 import com.lyang25.contacts.ui.theme.ContactsTheme
-import java.util.UUID
 
 @Composable
-fun AddContactScreen(
+fun DeleteContactScreen(
     onCancel: () -> Unit,
-    onAddContact: (Contact) -> Unit,
+    onDeleteContact: (Contact) -> Unit,
 ) {
     var fnameString by remember { mutableStateOf("") }
     var lnameString by remember { mutableStateOf("") }
@@ -82,14 +81,14 @@ fun AddContactScreen(
 
             Button(
                 onClick = {
-                    onAddContact(
-                        Contact(
-                            uuid = UUID.randomUUID(),
-                            fname = fnameString,
-                            lname = lnameString,
-                            nname = nnameString
-                        )
-                    )
+//                    onAddContact(
+//                        Contact(
+//                            uuid = UUID.randomUUID(),
+//                            fname = fnameString,
+//                            lname = lnameString,
+//                            nname = nnameString
+//                        )
+//                    )
                 },
                 Modifier
                     .fillMaxWidth()
@@ -104,11 +103,11 @@ fun AddContactScreen(
 
 @Preview
 @Composable
-fun AddContactScreenPreview() {
+fun DeleteContactScreenPreview() {
     ContactsTheme {
-        AddContactScreen(
+        DeleteContactScreen(
             onCancel = {},
-            onAddContact = {
+            onDeleteContact = {
                 Contact()
             })
     }

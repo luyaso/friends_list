@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.lyang25.contacts.R
 import com.lyang25.contacts.data.Contact
 import com.lyang25.contacts.ui.parts.ContactItem
+import com.lyang25.contacts.ui.parts.DeletionAlert
 import com.lyang25.contacts.ui.theme.ContactsTheme
 import java.util.UUID
 
@@ -48,28 +49,47 @@ fun MainScreen(
 ) {
 
     var showAddContactDialog by remember { mutableStateOf(false) }
+    var showDeletionAlert by remember { mutableStateOf(false) }
+    var selection by remember { mutableStateOf<Contact?>(null) }
 
     if (showAddContactDialog) {
 
-        AddContactScreen(
+        AddContactDialog(
             onCancel = { showAddContactDialog = false },
             onAddContact = {
                 addContact(it)
                 showAddContactDialog = false
-            })
+            }
+        )
 
-    } else {
-        Scaffold(
+    } else if (showDeletionAlert) {
+        DeletionAlert(
+            contact = selection?: Contact(),
+            onCancel = {
+                showDeletionAlert = false
+            },
+            onDelete = {
+                val deleteItem: Contact? = selection
+                if (deleteItem != null) {
+                    deleteContact(deleteItem)
+                    selection = null
+                }
+                showDeletionAlert = false
+            }
+        )
+    }
 
-            topBar = {
-                TopAppBar(
-                    colors = topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    title = {
-                        Text(stringResource(id = R.string.app_name))
-                    },
+    Scaffold(
+
+        topBar = {
+            TopAppBar(
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                ),
+                title = {
+                    Text(stringResource(id = R.string.app_name))
+                },
 //                    actions = {
 //                        IconButton(onClick = {
 //
@@ -80,14 +100,14 @@ fun MainScreen(
 //                            )
 //                        }
 //                    }
-                )
-            },
+            )
+        },
 
-            bottomBar = {
-                BottomAppBar(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
-                ) {
+        bottomBar = {
+            BottomAppBar(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.primary
+            ) {
 //                    Row {
 //                        IconButton(onClick = {
 //
@@ -98,62 +118,63 @@ fun MainScreen(
 //                            )
 //                        }
 //                    }
-                }
-            },
-
-            floatingActionButton = {
-                FloatingActionButton(onClick = {
-                    showAddContactDialog = true
-                }) {
-                    Icon(
-                        Icons.Default.Add,
-                        contentDescription = null
-                    )
-                }
             }
+        },
 
-        ) { innerPadding ->
-            Column(
-                modifier = Modifier.padding(innerPadding),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                showAddContactDialog = true
+            }) {
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = null
+                )
+            }
+        }
+
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
             ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    items(contactList) { contact ->
-                        Row() {
+                items(contactList) { contact ->
+                    Row() {
 
-                            Box(
-                                modifier = Modifier.weight(4f)
-                            ) {
-                                key(contact.id) {
-                                    ContactItem(
-                                        contact = contact,
-                                        onClick = {
-                                            // todo:
-                                        })
-                                }
+                        Box(
+                            modifier = Modifier.weight(4f)
+                        ) {
+                            key(contact.id) {
+                                ContactItem(
+                                    contact = contact,
+                                    onClick = {
+                                        // todo:
+                                    })
                             }
-
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(vertical = 5.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                IconButton(onClick = {
-                                    deleteContact(contact)
-                                }) {
-                                    Icon(
-                                        Icons.Default.Delete,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-
                         }
+
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(vertical = 5.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            IconButton(onClick = {
+//                                    deleteContact(contact)
+                                selection = contact
+                                showDeletionAlert = true
+                            }) {
+                                Icon(
+                                    Icons.Default.Delete,
+                                    contentDescription = null
+                                )
+                            }
+                        }
+
                     }
                 }
             }

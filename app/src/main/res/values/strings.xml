@@ -7,4 +7,6 @@
     <string name="fname">first name</string>
     <string name="lname">last name</string>
     <string name="nname">nickname</string>
+    <string name="confirmdelete">Permanently delete this contact?</string>
+    <string name="delete">delete</string>
 </resources>

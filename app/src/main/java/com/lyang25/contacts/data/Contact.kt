@@ -22,4 +22,10 @@ data class Contact(
 
     @ColumnInfo(name = "nickname")
     var nname: String = "",
+
+    @ColumnInfo(name = "email")
+    var email: String = "",
+
+    @ColumnInfo(name = "pronouns")
+    var pronouns: String = "",
 )

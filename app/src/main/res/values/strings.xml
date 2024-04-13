@@ -1,12 +1,29 @@
 <resources>
+
     <string name="app_name">Contacts</string>
     <string name="new_contact">New Contact</string>
+
     <string name="contact">contact</string>
+
     <string name="cancel">cancel</string>
     <string name="add">add</string>
+    <string name="delete">delete</string>
+
     <string name="fname">first name</string>
     <string name="lname">last name</string>
     <string name="nname">nickname</string>
+    <string name="email">email</string>
+
     <string name="confirmdelete">Permanently delete this contact?</string>
-    <string name="delete">delete</string>
+
+    <string-array name="pronous">
+        <item>she/her/hers</item>
+        <item>he/him/his</item>
+        <item>they/them/theirs</item>
+        <item>it/its</item>
+        <item>ze/zim/zir</item>
+        <item>xe/xim/xir</item>
+        <item>none, only name</item>
+    </string-array>
+
 </resources>

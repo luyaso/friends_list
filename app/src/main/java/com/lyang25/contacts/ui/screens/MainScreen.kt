@@ -1,5 +1,6 @@
 package com.lyang25.contacts.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -143,10 +145,14 @@ fun MainScreen(
                     .weight(1f)
             ) {
                 items(contactList) { contact ->
-                    Row() {
+                    Row(
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .background(color = Color.LightGray)
+                    ) {
 
                         Box(
-                            modifier = Modifier.weight(4f)
+                            modifier = Modifier.weight(5f)
                         ) {
                             key(contact.id) {
                                 ContactItem(
@@ -160,7 +166,7 @@ fun MainScreen(
                         Box(
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(vertical = 5.dp),
+                                .padding(vertical = 18.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             IconButton(onClick = {
@@ -174,7 +180,6 @@ fun MainScreen(
                                 )
                             }
                         }
-
                     }
                 }
             }
@@ -187,7 +192,9 @@ fun MainScreen(
 fun MainScreenPreview() {
     ContactsTheme {
         MainScreen(
-            contactList = listOf(Contact(0L, UUID(0L,0L), "first", "last", "nick")),
+            contactList = listOf(Contact(0L, UUID(0L,0L),
+                "first", "last", "nick",
+                pronouns = "he/him/his")),
             addContact = {},
             deleteContact = {})
     }

@@ -15,14 +15,15 @@
     <string name="email">email</string>
 
     <string name="confirmdelete">Permanently delete this contact?</string>
+    <string name="select_pronoun">Select Pronouns</string>
 
-    <string-array name="pronous">
+    <string-array name="pronouns">
         <item>she/her/hers</item>
         <item>he/him/his</item>
         <item>they/them/theirs</item>
+        <item>she/they</item>
+        <item>he/they</item>
         <item>it/its</item>
-        <item>ze/zim/zir</item>
-        <item>xe/xim/xir</item>
         <item>none, only name</item>
     </string-array>
 
